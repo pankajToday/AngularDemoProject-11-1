@@ -1,0 +1,168 @@
+<!--
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">Update User</h4>
+                <p class="card-category">Edit User Profile</p>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="aFormGroup" #formEditUser (ngSubmit)="onSubmit()"  >
+    <table>
+        <tr>
+            <th colspan="2"> User Edit</th>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>
+                <div [formGroup]="aFormGroup">
+                    <input type="text"  formControlName="userName"  >
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>
+                <div  [formGroup]="aFormGroup">
+                <input type="text"   formControlName="lastName" value="kumar" >
+            </div> </td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>
+                <div  [formGroup]="aFormGroup">
+                    <input type="text"  formControlName="mobile" value="9087657654" >
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit"  value="Save"  >
+                <input type="reset" value="Cancel" > </td>
+        </tr>
+    </table>
+</form>
+            </div>
+        </div>
+    </div>
+
+</div>
+-->
+
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">Update User</h4>
+                <p class="card-category">Edit User Profile</p>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="aFormGroup" #formEditUser (ngSubmit)="onSubmit()"  >
+                    <div class="row">
+                        <div class="offset-4 col-sm-4">
+                            <img src="../../assets/img/loading.gif" *ngIf="pageLodeIndicator">
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <label class="bmd-label-floating">User Role
+                                <span class="required">*</span>
+                            </label>
+                            <select class="form-control" formControlName="role_id" required >
+                                <option value="0" selected> Select Role</option>
+                                <option value="1">Engineer</option>
+                                <option value="2">Dealer</option>
+                                <option value="3">Approval</option>
+                            </select>
+                            <span class="errors" *ngIf="roleId.errors?.required && roleId.touched"> Role is required.</span>
+                            <span class="errors" *ngIf="roleId.errors?.pattern && roleId.touched">Role is invalid.</span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2" >
+                        <div class="col-md-6">
+                           <label class="bmd-label-floating pl-2">First Name <span class="required">*</span> </label>
+                            <input type="text" class="form-control" #first_name formControlName="first_name"
+                                   maxlength="30" >
+                            <span class="errors" *ngIf="firstName.errors?.required && firstName.touched">First Name is required</span>
+                            <span class="errors" *ngIf="firstName.errors?.pattern && firstName.touched">First Name is invalid</span>
+                        </div>
+                        <div class="col-md-6">
+                           <label class="bmd-label-floating pl-2">Last Name </label>
+                            <input type="text" class="form-control" formControlName="last_name"  maxlength="30" >
+                            <span class="errors" *ngIf="lastName.errors?.pattern && lastName.touched">Last Name is invalid</span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-4">
+                            <label class="bmd-label-floating pl-2">Email Id</label>
+                            <input type="text" class="form-control"  formControlName="phone_number">
+                            <span class="errors" *ngIf="emailId.errors?.required && emailId.touched">Email Id is required</span>
+                            <span class="errors" *ngIf="emailId.errors?.pattern && emailId.touched">Email Id is invalid</span>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="bmd-label-floating pl-2">Mobile</label>
+                            <input type="text" class="form-control"  formControlName="phone_number">
+                            <span class="errors" *ngIf="mobile.errors?.required && mobile.touched">Mobile No. is required</span>
+                            <span class="errors" *ngIf="mobile.errors?.pattern && mobile.touched">Mobile No. is invalid</span>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="bmd-label-floating pl-2">Alt. Number</label>
+                            <input type="text" class="form-control"  formControlName="alt_number">
+                            <span class="errors" *ngIf="altNumber.errors?.pattern && altNumber.touched">Alt Number No. is invalid</span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <label class="bmd-label-floating pl-2">Address</label>
+                            <textarea class="form-control"  formControlName="address"></textarea>
+                            <span class="errors" *ngIf="addressText.errors?.pattern && addressText.touched">Address is invalid</span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-4">
+                                <label class="bmd-label-floating pl-2">City </label>
+                                <select class="form-control "  #city_id formControlName="city_id"  >
+                                    <option value="0">Select Role</option>
+                                    <option value="1">Engineer</option>
+                                    <option value="2">Dealer</option>
+                                    <option value="3">Approval</option>
+                                </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="bmd-label-floating pl-2">District </label>
+                            <select class="form-control" #district_id formControlName="district_id">
+                                <option value="0">Select Role</option>
+                                <option value="1">Engineer</option>
+                                <option value="2">Dealer</option>
+                                <option value="3">Approval</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-4">
+                            <label  class="bmd-label-floating pl-2">Pin Code</label>
+                            <div class="form-group m-0">
+                                <input type="text" class="form-control"formControlName="pin_code" maxlength="6" >
+                                <span class="errors" *ngIf="pinCode.errors?.pattern && pinCode.touched"> Pin-Code is invalid.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <button type="submit" [disabled]="aFormGroup.invalid"  class="btn btn-danger pull-right" >Create User</button>
+                    <button type="button" class="btn btn-primary pull-right" (click)="formReset()"  >Reset</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

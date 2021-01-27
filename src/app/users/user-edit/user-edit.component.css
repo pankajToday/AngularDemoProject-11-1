@@ -1,0 +1,5 @@
+.required{ color: #FF0000; }
+select , textarea , input{padding-left: 5px; border-left: solid 3px orange;}
+/*input.ng-invalid{ border-left: solid 3px red;}
+input.ng-valid { border-left: solid 3px green;}*/
+.errors { color:  red;  border-left: solid 3px red; }

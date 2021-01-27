@@ -1,0 +1,193 @@
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">Add User</h4>
+                <p class="card-category">Create your User</p>
+            </div>
+            <div class="card-body">
+                <form  [formGroup]="aFormGroup" (ngSubmit)="onSubmit()" >
+                    <input type="hidden" class="form-control" #role_type_id formControlName="role_type_id" >
+
+                    <div class="row mt-5">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating">User Role
+                                    <span class="required">*</span>
+                                </label>
+                                <select class="form-control" #role_id (change)="checkRole(role_id.value)" formControlName="role_id" >
+                                    <option value="0" > Select Role</option>
+                                    <option value="1">Engineer</option>
+                                    <option value="2">Dealer</option>
+                                    <option value="3">Approval</option>
+                                </select>
+                                <span class="errors" *ngIf="roleId.errors?.required && roleId.touched"> Role is required.</span>
+                                <span class="errors" *ngIf="roleId.errors?.pattern && roleId.touched">Role is invalid.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="companyNameFiled" >
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="bmd-label-floating pl-2">Company Name <span class="required">*</span> </label>
+                                <input type="text" class="form-control"  formControlName="company_name" maxlength="80" >
+                                <span class="errors" *ngIf="companyName.errors?.pattern && companyName.touched">Company Name is invalid.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <label class="bmd-label-floating pt-3">
+                                <strong>GST</strong>
+                            </label>
+                        </div>
+                        <div class="col-md-2 p-0 pt-2">
+                                <div class="switchToggle">
+                                    <input type="checkbox" id="gst_status" #gst_status formControlName="gst_status"
+                                    (click)="enableGSTNo()">
+                                    <label for="gst_status"></label>
+                                </div>
+
+                            <span class="errors" *ngIf="gstStatus.errors?.pattern && gstStatus.touched">GST Option is invalid.</span>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group" *ngIf="gstNoField">
+                                <label class="bmd-label-floating pl-2">GST No. <span class="required">*</span> </label>
+                                <input type="text" class="form-control"  formControlName="gst_no" maxlength="15" >
+
+
+                                <span class="errors" *ngIf="gstNo.errors?.pattern && gstNo.touched">GST No. is invalid.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="userNameField" >
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating pl-2">First Name <span class="required">*</span> </label>
+                                <input type="text" class="form-control" #first_name formControlName="first_name" maxlength="30" >
+                                <span class="errors" *ngIf="firstName.errors?.required && firstName.touched"> First Name is required.</span>
+                                <span class="errors" *ngIf="firstName.errors?.pattern && firstName.touched">First Name is invalid.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating pl-2">Last Name </label>
+                                <input type="text" class="form-control" #last_name formControlName="last_name" maxlength="30" >
+                                <span class="errors" *ngIf="lastName.errors?.pattern && lastName.touched">Last Name is invalid.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating pl-2">Password <span class="required">*</span> </label>
+                                <input type="password" class="form-control" #password formControlName="password" maxlength="10" >
+                                <span class="errors" *ngIf="passwordText.errors?.required && passwordText.touched"> Password is required.</span>
+                                <span class="errors" *ngIf="passwordText.errors?.pattern && passwordText.touched">Password is invalid.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="bmd-label-floating pl-2 ">Confirm Password <span class="required">*</span> </label>
+                                <input type="password" class="form-control" #password_confirm
+                                       formControlName="password_confirm" maxlength="10" (blur)="verifyPassword()" >
+                                <span class="errors" *ngIf="passwordConfirm.errors?.required && passwordConfirm.touched"> Confirm Password is required.</span>
+                                <span class="errors" *ngIf="passwordConfirm.errors?.pattern && passwordConfirm.touched"> Confirm Password is invalid.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="bmd-label-floating pl-2">Email Id <span class="required">*</span> </label>
+                                <input type="text" class="form-control" #email_id formControlName="email_id" maxlength="80">
+                                <span class="errors" *ngIf="emailId.errors?.required && emailId.touched"> Email Id is required.</span>
+                                <span class="errors" *ngIf="emailId.invalid && emailId.touched">Email Id is invalid.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="bmd-label-floating pl-2">Phone Number <span class="required">*</span> </label>
+                                <input type="text" class="form-control" #phone_number formControlName="phone_number" maxlength="13">
+                                <span class="errors" *ngIf="phoneNumber.errors?.required && phoneNumber.touched"> Phone Number is required.</span>
+                                <span class="errors" *ngIf="phoneNumber.errors?.pattern && phoneNumber.touched">Phone Number is invalid.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="bmd-label-floating pl-2">Alternate Number </label>
+                                <input type="text" class="form-control" #alt_number formControlName="alt_number"   maxlength="13">
+                                <span class="errors" *ngIf="altNumber.errors?.pattern && altNumber.touched"> Alt. Number is invalid.</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label  class="bmd-label-floating pl-2">Address</label>
+                                <div class="form-group">
+                                    <textarea class="form-control" #address rows="2" formControlName="address"></textarea>
+                                <span class="errors" *ngIf="addressText.errors?.pattern && addressText.touched"> Address is invalid.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="bmd-label-floating pl-2">City </label>
+                                <select class="form-control "  #city_id formControlName="city_id"  >
+                                    <option value="0">Select Role</option>
+                                    <option value="1">Kolkata</option>
+                                    <option value="2">Dhanbad</option>
+                                    <option value="3">Delhi</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="bmd-label-floating pl-2">District </label>
+                                <select class="form-control" #district_id formControlName="district_id">
+                                    <option value="0">Select Role</option>
+                                    <option value="1">Jalpaiguri</option>
+                                    <option value="2">Jhargram</option>
+                                    <option value="3">Kolkata</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label  class="bmd-label-floating pl-2">Pin Code</label>
+                                <div class="form-group m-0">
+                                    <input type="text" class="form-control" #pin_code formControlName="pin_code" maxlength="6" >
+                                    <span class="errors" *ngIf="pinCode.errors?.pattern && pinCode.touched"> Pin-Code is invalid.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label  class="bmd-label-floating pl-2">Captcha <span class="required">*</span> </label>
+                                <div class="form-group">
+                                    <ngx-recaptcha2  #captchaElem
+                                      [siteKey]="siteKey"
+                                      formControlName="recaptcha"></ngx-recaptcha2>
+                                    <span class="errors" *ngIf="recaptchaText.invalid && recaptchaText.touched"> Captcha is invalid.</span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" [disabled]="aFormGroup.invalid" class="btn btn-danger pull-right" >Create User</button>
+                    <button type="button" class="btn btn-primary pull-right" (click)="formReset()"  >Reset</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

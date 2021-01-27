@@ -1,0 +1,159 @@
+
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-warning card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons fa fa-users"></i>
+                </div>
+                <p class="card-category">Total Users</p>
+                <h3 class="card-title">
+                    <small>{{usersList?usersList.length:0}}  </small>
+
+                </h3>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons fa fa-users"></i>
+                </div>
+                <p class="card-category">Engineer</p>
+                <h3 class="card-title"><small>{{usersList?usersList.length+5:0}} </small></h3>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-danger card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons fa fa-users"></i>
+                </div>
+                <p class="card-category">Dealer</p>
+                <h3 class="card-title"><small>45</small></h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+            <div class="card-header card-header-info card-header-icon">
+                <div class="card-icon">
+                    <i class="material-icons fa fa-users"></i>
+                </div>
+                <p class="card-category">Approval</p>
+                <h3 class="card-title"><small>15</small></h3>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="card-header card-header-warning">
+                <h4 class="card-title">User List</h4>
+                <!--  <p class="card-category">New employees on 15th September, 2016</p>-->
+            </div>
+            <div class="card-body table-responsive dataTable">
+                <div class="row">
+                    <div class="offset-4 col-sm-4">
+                        <img src="../../assets/img/loading.gif" *ngIf="pageLoad">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4 offset-6">
+                        <form class="navbar-form" action="">
+                            <div class="input-group no-border">
+                                <input type="text" value="" class="form-control" placeholder="Search...">
+                                <button type="button" class="btn btn-white btn-round btn-just-icon ml-1  mt-0">
+                                    <i class="material-icons">search</i>
+                                    <div class="ripple-container"></div>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-2">
+                        <a routerLink="/user-add" class="btn btn-warning font-white">
+                            <i class="material-icons">add </i> Add New
+                        </a>
+
+                    </div>
+                </div>
+
+               <!-- <div class="d-flex flex-row-reverse bd-highlight mb-2">
+                    <div class="p-2 bd-highlight">
+                        <select (change)="onTableSizeChange($event)" class="custom-select">
+                            <option *ngFor="let size of tableSizes" [ngValue]="size">
+                                {{ size }}
+                            </option>
+                        </select>
+                    </div>
+                </div>-->
+
+                <table class="table table-hover">
+                    <thead class="text-warning">
+                    <tr>
+                        <th>Sl. No.</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--<tr *ngFor="let user of usersList">-->
+                    <tr *ngFor="let user of usersList | paginate : {
+                                    itemsPerPage: tableSize,
+                                    currentPage: page,
+                                    totalItems: count
+                                  };
+                                let i = index" [class.active]="i == currentIndex">
+                        <td>{{user.id}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.email}}</td>
+                        <th>{{user.phone}}</th>
+                        <td>{{user.address.street}} , {{user.address.city}} , {{user.address.zipcode}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" [routerLink]="['/user-view',user.id]"><i class="fa fa-eye"> </i> View</a>
+                                    <a class="dropdown-item" [routerLink]="['/user-edit',user.id]"><i class="fa fa-pencil"> Edit </i> </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" (click)="deleteConfirmation(user.id)"><i class="fa fa-trash"></i> Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="6">
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-center">
+                    <pagination-controls
+                            responsive="true"
+                            previousLabel="Prev"
+                            nextLabel="Next"
+                            (pageChange)="onTableDataChange($event)">
+                    </pagination-controls>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
