@@ -16,6 +16,7 @@ import { UserListComponent } from './Users/user-list/user-list.component';
 import { UserCreateComponent } from './Users/user-create/user-create.component';
 import { UserViewComponent } from './Users/user-view/user-view.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import {LoginComponent} from './login/login.component';
 
 
 // source :: https://angular.io/guide/router-tutorial-toh
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
     { path: 'heroes', component: HeroListComponent },
     { path: 'hero', component: HeroComponent },
 
+    { path: 'login', component: LoginComponent },
     { path: 'sample-dashboard', component: DashboardComponent },
     { path: 'users', component: UserListComponent },
     { path: 'user-add', component: UserCreateComponent },

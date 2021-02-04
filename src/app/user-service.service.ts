@@ -79,16 +79,15 @@ export class UserServiceService {
         return this.http.get(endPoint2+'/users/'+id,this.httpHeader);
     }
 
-
     addUser(formData){
         let url ='https://jsonplaceholder.typicode.com/posts';
         return this.http.post(url,formData,{observe: 'response'}).pipe(catchError(this.processError) );
     }
 
-    testHttpStatus(formData)
+    userLoginApi(formData)
     {
-        let url =endPoint2+'register';
-       return this.http.post(url, formData,{observe: 'response'} ).pipe(catchError(this.processError) );
+        let url = endPoint2+'/login';
+        return this.http.post(url,formData,{observe: 'response'}).pipe(catchError(this.processError) );
     }
 
     updateUser(id)
@@ -110,12 +109,13 @@ export class UserServiceService {
         } else {
             message = `Error Code: ${err.status}\nMessage: ${err.message}`;
         }
-        if( err.status == 404)
-        {Swal.fire('Error!','Something went wrong code : 400.','error')}
+        if( err.status == 400)
+        {Swal.fire('Error!','Error code : 400.\n'+err.error.error,'error')}
         else if( err.status == 404)
-        {Swal.fire('Error!','Something went wrong code : 404.','error')}
+        {Swal.fire('Error!','Error code : 404.\n'+err.error.error,'error')}
         else if( err.status == 500)
-        {Swal.fire('Error!','Something went wrong code : 500.','error')}
+        {Swal.fire('Error!','Error code : 500.\n'+err.error.error,'error')}
+
         return throwError(message);
     }
 

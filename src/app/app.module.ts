@@ -25,6 +25,7 @@ import { UserCreateComponent } from './Users/user-create/user-create.component';
 import { UserViewComponent } from './Users/user-view/user-view.component';
 import { UserDeleteComponent } from './users/user-delete/user-delete.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -43,6 +44,7 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
     UserViewComponent,
     UserDeleteComponent,
     UserEditComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,

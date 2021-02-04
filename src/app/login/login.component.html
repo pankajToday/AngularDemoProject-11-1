@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title">Instafixx Login </h4>
+            </div>
+            <div class="card-body">
+                <form  [formGroup]="aFormGroup" (ngSubmit)="onSubmit()" >
+
+                <div class="row">
+                    <div class="col-sm-6 offset-4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating pl-2">Login-Id <span class="required">*</span> </label>
+                                    <input type="text" class="form-control" formControlName="email" maxlength="80" />
+                                    <span class="errors" *ngIf="loginIdField.errors?.required && loginIdField.touched"> Login-Id is required.</span>
+                                    <span class="errors" *ngIf="loginIdField.errors?.pattern && loginIdField.touched">Login-Id is invalid.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating pl-2 ">Password <span class="required">*</span> </label>
+                                    <input type="password" class="form-control" formControlName="password"
+                                           maxlength="10" />
+                                    <span class="errors" *ngIf="passwordField.errors?.required && passwordField.touched">  Password is required.</span>
+                                    <span class="errors" *ngIf="passwordField.errors?.pattern && passwordField.touched">  Password is invalid.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div  class="col-md-6">
+                                <button type="button" class="btn btn-primary pull-right"
+                                        (click)="formReset()" >Reset</button>
+
+                                <button type="submit" [disabled]="aFormGroup.invalid"
+                                        class="btn btn-danger pull-right" >Login <i class="fa fa-sign-in"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
